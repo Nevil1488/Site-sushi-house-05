@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Суши АС — Главная</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* =====================================================
+       БАЗОВЫЕ СТИЛИ
+    ===================================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f9f9f9;
+      color: #1d1d1f;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================================
+       ВЕРХНЯЯ ШАПКА
+    ===================================================== */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      padding: 12px 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .logo-area { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .logo-number { color: #1d1d1f; }
+
+    .logo-img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #eaeaea;
+      border: 2px solid #d32f2f;
+    }
+
+    .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+
+    .logo-title {
+      font-size: 22px;
+      font-weight: 750;
+      color: #d32f2f;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-sub { font-size: 12px; font-weight: 640; color: #333; letter-spacing: 0.5px; }
+
+    .search-wrapper {
+      flex: 1;
+      max-width: 600px;
+      min-width: 220px;
+      position: relative;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 50px;
+      padding: 10px 18px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .search-box:focus-within {
+      border-color: #d32f2f;
+      box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+    }
+
+    .search-box svg { width: 18px; height: 18px; stroke: #999; flex-shrink: 0; }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      width: 100%;
+      margin-left: 10px;
+      font-size: 15px;
+      color: #333;
+      background: transparent;
+      padding-right: 26px;
+    }
+
+    .search-box input::placeholder { color: #aaa; }
+
+    .search-clear {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 22px;
+      height: 22px;
+      border: none;
+      background: #e5e5e5;
+      border-radius: 50%;
+      color: #666;
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: background 0.15s;
+    }
+
+    .search-clear:hover { background: #d0d0d0; }
+    .search-clear.visible { display: flex; }
+
+    .search-suggestions {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid #ececec;
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+      max-height: 420px;
+      overflow-y: auto;
+      z-index: 200;
+      display: none;
+      padding: 6px;
+    }
+
+    .search-suggestions.open { display: block; }
+
+    .suggestion-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .suggestion-item:hover,
+    .suggestion-item.active { background: #fff2f2; }
+
+    .suggestion-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #f4f4f4;
+      flex-shrink: 0;
+    }
+
+    .suggestion-thumb-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: #fdeceb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .suggestion-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .suggestion-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1d1d1f;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .suggestion-category { font-size: 11px; color: #888; font-weight: 600; }
+
+    .suggestion-price {
+      font-size: 14px;
+      font-weight: 800;
+      color: #d32f2f;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .suggestion-empty {
+      padding: 24px 16px;
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .suggestion-empty-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+      opacity: 0.5;
+    }
+
+    .phone-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      text-decoration: none;
+      color: inherit;
+      padding: 8px 14px;
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+
+    .phone-area:hover { background: #fff5f5; }
+
+    .phone-area svg {
+      width: 22px;
+      height: 22px;
+      fill: #d32f2f;
+      flex-shrink: 0;
+    }
+
+    .phone-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .phone-label { font-size: 11px; color: #777; font-weight: 600; }
+    .phone-number {
+      font-size: 16px;
+      font-weight: 800;
+      color: #d32f2f;
+      white-space: nowrap;
+    }
+
+    .banner { width: 100%; height: 375px; overflow: hidden; background: #eaeaea; }
+    .banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .info-section {
+      width: 100%;
+      background: #ffffff;
+      padding: 24px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .info-top {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .address, .work-hours {
+      font-size: 18px;
+      font-weight: 700;
+      color: #000;
+      line-height: 1.4;
+    }
+
+    .second-color { font-size: 19px; font-weight: 750; color: #6b6b6b; line-height: 1.4; }
+    .work-hours { text-align: right; }
+
+    .action-buttons { width: 100%; max-width: 900px; display: flex; gap: 10px; }
+
+    .btn-whatsapp {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #d32f2f;
+      color: #fff;
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+
+    .btn-whatsapp:hover { background: #b71c1c; }
+
+    .btn-call {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #ffffff;
+      color: #1d1d1f;
+      padding: 14px 24px;
+      border-radius: 14px;
+      border: 1px solid #000;
+      font-weight: 700;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+
+    .btn-call:hover { background: #fff5f5; }
+    .btn-whatsapp svg, .btn-call svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* =====================================================
+       НИЖНЯЯ ЧАСТЬ
+    ===================================================== */
+    :root {
+      --red: #D81E28;
+      --black: #141414;
+      --grey: #6b6b6b;
+      --line: #ececec;
+      --bg: #ffffff;
+    }
+
+    .sticky-nav {
+      position: sticky;
+      top: 80px;
+      z-index: 50;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      border-top: 1px solid var(--line);
+    }
+
+    nav.cats {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding: 12px 14px;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    nav.cats::-webkit-scrollbar { display: none; }
+
+    .story {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      width: 64px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .story-ring {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #d8d8d8, #d8d8d8);
+      padding: 2.5px;
+      transition: background .2s ease;
+    }
+
+    .story.active .story-ring {
+      background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+    }
+
+    .story-ring-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 2px solid #fff;
+    }
+
+    .story-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .story-thumb-icon { font-size: 28px; line-height: 1; }
+
+    .story-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--black);
+      text-align: center;
+      line-height: 1.15;
+      white-space: normal;
+      max-width: 64px;
+    }
+
+    .story.active .story-label { color: var(--red); }
+
+    main { padding: 16px 14px 130px; max-width: 900px; margin: 0 auto; }
+    section.category { margin-bottom: 30px; }
+
+    section.category h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 14px;
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 6px;
+    }
+
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+
+    .item.visible { opacity: 1; transform: translateY(0); }
+    .item.just-added { animation: cardFlash .4s ease; }
+    .item.highlight { animation: highlightPulse 1.6s ease; }
+
+    @keyframes cardFlash {
+      0% { box-shadow: 0 0 0 0 rgba(216, 30, 40, 0.5); }
+      100% { box-shadow: 0 0 0 8px rgba(216, 30, 40, 0); }
+    }
+
+    @keyframes highlightPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.9); }
+      40%  { box-shadow: 0 0 0 8px rgba(211, 47, 47, 0.4); }
+      100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
+    }
+
+    .item-thumb-wrap { position: relative; }
+
+    .item-thumb {
+      width: 100%;
+      aspect-ratio: 1/1;
+      display: block;
+      background-color: #f4f4f4;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: transform .3s ease;
+      cursor: pointer;
+    }
+
+    .item:active .item-thumb { transform: scale(1.04); }
+
+    .item-thumb-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      background: #fdeceb;
+    }
+
+    .item-info { flex: 1; min-width: 0; padding: 10px 12px 12px; display: flex; flex-direction: column; }
+    .item-name { font-size: 14.5px; font-weight: 700; margin: 0 0 4px; }
+
+    .item-desc {
+      font-size: 12px;
+      color: var(--grey);
+      line-height: 1.35;
+      margin: 0 0 10px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .item-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; }
+    .price { color: var(--black); font-weight: 700; font-size: 14px; white-space: nowrap; }
+
+    .qty { display: flex; align-items: center; gap: 6px; }
+
+    .qty button {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid var(--black);
+      background: #fff;
+      font-size: 15px;
+      line-height: 1;
+      color: var(--black);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform .15s ease;
+    }
+
+    .qty button:active { background: var(--black); color: #fff; transform: scale(0.88); }
+
+    .qty .count {
+      min-width: 14px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 13px;
+      display: inline-block;
+      animation: popIn .2s ease;
+    }
+
+    .add-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: none;
+      background: var(--red);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform .15s ease;
+    }
+
+    .add-btn:active { transform: scale(0.85); }
+
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @media (min-width: 520px) { .item-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 760px) { .item-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--grey);
+      font-size: 15px;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--line);
+      border-top-color: var(--red);
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-box {
+      text-align: center;
+      padding: 40px 20px;
+      color: #b71c1c;
+      background: #ffeaea;
+      border: 1px solid #ffcccc;
+      border-radius: 12px;
+      margin: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .site-footer { padding: 24px 0 130px; }
+
+    .footer-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 16px 18px;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+
+    .footer-pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--black);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 11px 18px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+    }
+
+    .footer-pill:active { background: #f6f6f6; }
+    .map-embed { max-width: 600px; margin: 0 auto; padding: 0 16px 24px; }
+    .map-embed iframe { border-radius: 14px; width: 100%; }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 20px 16px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-brand { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .footer-brand span { color: var(--red); }
+    .footer-copy { font-size: 12px; color: var(--grey); margin-bottom: 12px; }
+    .footer-links { display: flex; justify-content: center; gap: 18px; }
+    .footer-links a { font-size: 13px; font-weight: 600; color: var(--black); }
+
+    .floating-cart {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 60;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 22px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 24px rgba(216, 30, 40, 0.4);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .floating-cart:hover { background: #b71c1c; transform: translateY(-2px); }
+    .floating-cart svg { width: 20px; height: 20px; stroke: #fff; fill: none; }
+
+    .floating-cart .badge {
+      background: #fff;
+      color: var(--red);
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 70;
+      display: none;
+    }
+
+    .overlay.open { display: block; }
+
+    .drawer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 80;
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform .25s ease;
+    }
+
+    .drawer.open { transform: translateY(0); }
+
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px;
+      border-bottom: 2px solid #d32f2f;
+      background: #fff;
+    }
+
+    .drawer-head h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+      color: #d32f2f;
+      letter-spacing: 0.3px;
+    }
+
+    .drawer-head button {
+      border: none;
+      background: none;
+      font-size: 22px;
+      color: var(--grey);
+      cursor: pointer;
+    }
+
+    .drawer-body {
+      overflow-y: auto;
+      padding: 0 18px;
+      flex: 1 1 auto;
+      min-height: 150px;
+      max-height: 40vh;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+    }
+
+    .drawer-body::after {
+      content: '';
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: block;
+      height: 24px;
+      background: linear-gradient(to top, rgba(255,255,255,0.95), rgba(255,255,255,0));
+      pointer-events: none;
+      margin-top: -24px;
+    }
+
+    .drawer-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      gap: 10px;
+    }
+
+    .drawer-line .item-info-block {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .drawer-line .item-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .drawer-line .name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1d1d1f;
+    }
+
+    .drawer-line .category-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      color: #d32f2f;
+      background: #fdeceb;
+      border-radius: 6px;
+      padding: 2px 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .drawer-line .sum {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--red);
+      white-space: nowrap;
+    }
+
+    .drawer-qty { display: flex; align-items: center; gap: 6px; flex: 0 0 auto; }
+
+    .drawer-qty button {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--black);
+      background: #fff;
+      font-size: 14px;
+      line-height: 1;
+      color: var(--black);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drawer-qty .count { min-width: 14px; text-align: center; font-weight: 700; font-size: 13px; }
+
+    .drawer-qty .remove {
+      border: none;
+      background: none;
+      color: var(--red);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0 2px;
+      line-height: 1;
+    }
+
+    .drawer-foot {
+      padding: 14px 18px 20px;
+      border-top: 1px solid var(--line);
+      flex: 0 1 auto;
+      overflow-y: auto;
+      max-height: 55vh;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .drawer-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .delivery-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--grey);
+      margin-bottom: 6px;
+    }
+
+    .delivery-line b { color: var(--black); font-weight: 600; }
+    .delivery-note { font-size: 12px; color: var(--grey); margin: -2px 0 10px; }
+
+    .field { margin-bottom: 10px; }
+    .field label { font-size: 12px; color: var(--grey); display: block; margin-bottom: 4px; }
+
+    .field input, .field select, .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      background: #fafafa;
+    }
+
+    .toggle-group { display: flex; gap: 8px; margin-bottom: 10px; }
+
+    .toggle-group button {
+      flex: 1;
+      padding: 9px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fafafa;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .toggle-group button.active { background: var(--black); color: #fff; border-color: var(--black); }
+
+    .wa-btn {
+      width: 100%;
+      background: #d32f2f;
+      color: #fff;
+      border: none;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px;
+      border-radius: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 6px 18px rgba(211, 47, 47, 0.3);
+    }
+
+    .wa-btn:hover { background: #b71c1c; }
+    .wa-btn:active { transform: scale(0.98); }
+
+    .empty-cart { padding: 30px 0; text-align: center; color: var(--grey); font-size: 14px; }
+    .hint { font-size: 11px; color: var(--grey); text-align: center; margin-top: 8px; }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(0, 0, 0, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .3s ease, background .3s ease, visibility 0s linear .3s;
+    }
+
+    .lightbox.open {
+      background: rgba(0, 0, 0, 0.92);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: opacity .3s ease, background .3s ease, visibility 0s linear 0s;
+    }
+
+    .lightbox-img {
+      max-width: 92vw;
+      max-height: 78vh;
+      border-radius: 12px;
+      object-fit: contain;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      transform: scale(0.7);
+      opacity: 0;
+      transition: transform .35s cubic-bezier(.25, 1.4, .4, 1), opacity .3s ease;
+    }
+
+    .lightbox.open .lightbox-img { transform: scale(1); opacity: 1; }
+
+    .lightbox-caption {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast {
+      position: relative;
+      min-width: 260px;
+      max-width: 340px;
+      padding: 14px 18px 16px 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #2ecc71 0%, #25D366 55%, #1ebe5b 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1.35;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45), 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      pointer-events: auto;
+      animation: toastIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .toast.hide { animation: toastOut 0.4s cubic-bezier(0.4, 0, 1, 1) forwards; }
+
+    .toast-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .toast-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: #fff;
+      stroke-width: 3.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 24;
+      stroke-dashoffset: 24;
+      animation: checkDraw 0.4s ease 0.3s forwards;
+    }
+
+    .toast-text { position: relative; z-index: 1; }
+    .toast-text b { font-weight: 900; }
+
+    .toast-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      animation: progress 2.2s linear forwards;
+    }
+
+    @keyframes toastIn {
+      0%   { transform: translateX(130%) scale(0.85); opacity: 0; }
+      60%  { transform: translateX(-8px) scale(1.03); opacity: 1; }
+      80%  { transform: translateX(3px) scale(0.99); }
+      100% { transform: translateX(0) scale(1); opacity: 1; }
+    }
+
+    @keyframes toastOut {
+      0%   { transform: translateX(0) scale(1); opacity: 1; }
+      100% { transform: translateX(130%) scale(0.9); opacity: 0; }
+    }
+
+    @keyframes checkDraw { to { stroke-dashoffset: 0; } }
+    @keyframes progress { from { width: 100%; } to { width: 0%; } }
+
+    /* =====================================================
+       ПЛАНШЕТ (до 768px не включ) — ЛОГО И ТЕЛЕФОН ПО УГЛАМ
+       АДРЕС И ЧАСЫ В ОДНУ СТРОКУ
+    ===================================================== */
+        @media (max-width: 767px) {
+
+      /* Шапка: две строки — лого слева / телефон справа, поиск внизу */
+      .header {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 14px;
+        gap: 10px;
+      }
+
+      .logo-area {
+        order: 1;
+        flex: 0 1 auto;
+        min-width: 0;
+      }
+
+      .logo-title { font-size: 18px; }
+      .logo-sub { font-size: 10px; }
+      .logo-img { width: 44px; height: 44px; }
+
+      .phone-area {
+        order: 2;
+        margin-left: auto;
+        padding: 6px 8px;
+        gap: 6px;
+      }
+
+      .phone-area svg { width: 18px; height: 18px; }
+      .phone-number { font-size: 14px; }
+      .phone-label { font-size: 10px; }
+
+      .search-wrapper {
+        order: 3;
+        flex: 1 1 100%;
+        max-width: 100%;
+        min-width: 100%;
+      }
+
+      .search-box { padding: 9px 16px; }
+      .search-box input { font-size: 14px; }
+
+      /* Круги категорий — выравнивание по левому краю, чтобы все были доступны */
+      nav.cats {
+        justify-content: flex-start;
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      /* Баннер */
+      .banner { height: 200px; }
+
+      /* ИНФО: адрес и часы в одну строку */
+      .info-section { padding: 14px 16px; }
+
+      .info-top {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        text-align: left;
+      }
+
+      .address, .work-hours {
+        font-size: 15px;
+        line-height: 1.3;
+      }
+
+      .second-color { font-size: 16px; }
+
+      .work-hours { text-align: right; }
+
+      /* Кнопки WhatsApp / Позвонить */
+      .action-buttons { flex-direction: column; gap: 10px; }
+      .btn-whatsapp, .btn-call { width: 100%; justify-content: center; }
+
+      .sticky-nav { top: 0; }
+
+      .toast-container { bottom: 100px; right: 12px; left: 12px; align-items: flex-end; }
+      .toast { min-width: 0; max-width: 100%; }
+
+      .floating-cart { right: 14px; bottom: 14px; padding: 12px 18px; font-size: 13px; }
+
+      .search-suggestions { max-height: 60vh; }
+    }
+
+    /* =====================================================
+       ТЕЛЕФОН (до 480px) — прячем текст лого
+    ===================================================== */
+    @media (max-width: 480px) {
+      .logo-text { display: none; }
+      .phone-area { padding: 6px 8px; }
+      .search-box input::placeholder { font-size: 12px; }
+
+      /* Адрес и часы ещё компактнее */
+      .address, .work-hours { font-size: 13px; }
+      .second-color { font-size: 14px; }
+    }
+</style>
+</head>
+<body>
+
+  <!-- ================= ВЕРХНЯЯ ШАПКА ================= -->
+  <header class="header">
+    <div class="logo-area">
+      <img class="logo-img" src="images/WhatsApp Image 2026-09-29 at 12.55.08.jpeg" alt="">
+      <div class="logo-text">
+        <span class="logo-title">SUSHI HOUSE <span class="logo-number">05</span></span>
+        <span class="logo-sub">С вами с 2021!</span>
+      </div>
+    </div>
+
+    <div class="search-wrapper">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Начните вводить название блюда" autocomplete="off">
+        <button type="button" class="search-clear" id="searchClear" aria-label="Очистить">×</button>
+      </div>
+      <div class="search-suggestions" id="searchSuggestions"></div>
+    </div>
+
+    <a class="phone-area" href="tel:+79282245426">
+      <svg viewBox="0 0 24 24">
+        <path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1.5 1.5 0 0 1 1.5-.4l3.5 1a1.5 1.5 0 0 1 1.1 1.5V21a1.5 1.5 0 0 1-1.6 1.5C10.6 22 2 13.4 1.5 4.6A1.5 1.5 0 0 1 3 3h3.7a1.5 1.5 0 0 1 1.5 1.1l1 3.5a1.5 1.5 0 0 1-.4 1.5l-2.2 2.2Z"/>
+      </svg>
+      <div class="phone-text">
+        <span class="phone-label">Позвонить</span>
+        <span class="phone-number">+7 928 224-54-26</span>
+      </div>
+    </a>
+  </header>
+
+  <!-- ================= БАННЕР ================= -->
+  <div class="banner">
+    <img src="images/WhatsApp Image 2026-09-29 at 22.32.12.jpeg" alt="">
+  </div>
+
+  <!-- ================= ИНФО-СЕКЦИЯ ================= -->
+  <div class="info-section">
+    <div class="info-top">
+      <div class="address">
+        Адрес:<br>
+        <span class="second-color">с. Борагангечув</span>
+      </div>
+      <div class="work-hours">
+        Работаем<br>
+        <span class="second-color">с 10:00 до 23:00</span>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <a href="https://wa.me/79282245426" target="_blank" rel="noopener" class="btn-whatsapp">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/>
+        </svg>
+        Написать в WhatsApp
+      </a>
+
+      <a href="tel:+79282245426" class="btn-call">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        Позвонить
+      </a>
+    </div>
+  </div>
+
+  <!-- ================= КАТЕГОРИИ ================= -->
+  <div class="sticky-nav">
+    <nav class="cats" id="catNav"></nav>
+  </div>
+
+  <!-- ================= МЕНЮ ================= -->
+  <main id="menu">
+    <div class="loading">
+      <div class="loading-spinner"></div>
+      Загружаем меню...
+    </div>
+  </main>
+
+  <!-- ================= ФУТЕР ================= -->
+  <footer class="site-footer">
+    
+
+    
+
+    <div class="footer-bottom">
+      <div class="footer-brand">SUSHI HOUSE <span>05</span></div>
+      <div class="footer-copy">Более 5 лет готовим для вас</div>
+      
+    </div>
+  </footer>
+
+  <!-- ================= ПЛАВАЮЩАЯ КНОПКА КОРЗИНЫ ================= -->
+  <button class="floating-cart" id="floatingCart">
+    <svg viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+    </svg>
+    <span>Корзина</span>
+    <span class="badge" id="floatingCartCount">0</span>
+  </button>
+
+  <!-- ================= DRAWER ================= -->
+  <div class="overlay" id="overlay"></div>
+  <div class="drawer" id="drawer">
+    <div class="drawer-head">
+      <h3>Ваш заказ</h3>
+      <button id="closeCart">&times;</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-foot">
+      <div class="drawer-total"><span>Сумма заказа</span><span id="drawerTotal">0 ₽</span></div>
+
+      <div class="toggle-group">
+        <button id="typeDelivery" class="active">Доставка</button>
+        <button id="typePickup">Самовывоз / зал</button>
+      </div>
+
+      <div class="field" id="zoneField">
+        <label>Населённый пункт</label>
+        <select id="deliveryZone"></select>
+      </div>
+
+      <div class="field" id="addressField">
+        <label>Адрес доставки</label>
+        <input type="text" id="address" placeholder="Улица, дом, кв.">
+      </div>
+
+      <div class="delivery-line" id="deliveryLine" style="display:none;">
+        <span id="deliveryLabel">Доставка</span><b id="deliveryCost">0 ₽</b>
+      </div>
+      <div class="delivery-note" id="deliveryNote" style="display:none;"></div>
+      <div class="drawer-total" id="grandTotalRow" style="display:none;">
+        <span>Итого к оплате</span><span id="grandTotal">0 ₽</span>
+      </div>
+
+      <div class="field">
+        <label>Имя</label>
+        <input type="text" id="clientName" placeholder="Как к вам обращаться">
+      </div>
+
+      <div class="field">
+        <label>Телефон</label>
+        <input type="tel" id="clientPhone" placeholder="+7 ___ ___-__-__">
+      </div>
+
+      <div class="field">
+        <label>Комментарий (необязательно)</label>
+        <textarea id="comment" rows="2" placeholder="Например: без лука, позвонить перед доставкой"></textarea>
+      </div>
+
+      <button class="wa-btn" id="sendWa">Отправить заказ в WhatsApp</button>
+      <div class="hint">Заказ откроется в WhatsApp — просто нажмите «Отправить»</div>
+    </div>
+  </div>
+
+  <!-- ================= LIGHTBOX ================= -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Закрыть">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <!-- ================= TOAST ================= -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+    /* ===================== НАСТРОЙКИ ===================== */
+    const WHATSAPP_NUMBER = "79282245426";
+
+    const DELIVERY_ZONES = [
+      { name: "Солнечное",    freeFrom: 600,  price: 100 },
+      { name: "Нурадилово",   freeFrom: 1000, price: 150 },
+      { name: "Борангечув",   freeFrom: 1000, price: 200 },
+      { name: "Цолода",       freeFrom: 1500, price: 350 },
+      { name: "Хамавюрт",     freeFrom: 1500, price: 350 },
+      { name: "Гамиях",       freeFrom: 1500, price: 350 },
+    ];
+    const DELIVERY_CUSTOM_VALUE = "__custom__";
+
+    /* ===================== СОСТОЯНИЕ ===================== */
+    const cart = {};
+    let MENU = [];
+
+    function keyOf(cat, name) { return cat + "|" + name; }
+    function fmt(n) { return n.toLocaleString('ru-RU') + " ₽"; }
+    function slug(str) {
+      return str.toLowerCase().replace(/[^a-zа-я0-9]+/gi, '-').replace(/(^-|-$)/g, '');
+    }
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+    function showToast(dishName, qty) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `
+        <div class="toast-icon">
+          <svg viewBox="0 0 24 24">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <div class="toast-text">
+          <b>${dishName}</b> × ${qty} — успешно добавлено
+        </div>
+        <div class="toast-progress"></div>
+      `;
+      container.appendChild(toast);
+      while (container.children.length > 4) container.removeChild(container.firstChild);
+      setTimeout(() => {
+        toast.classList.add('hide');
+        setTimeout(() => toast.remove(), 400);
+      }, 2200);
+    }
+
+    /* =====================================================
+       ЗАГРУЗКА МЕНЮ
+    ===================================================== */
+    const menuEl = document.getElementById('menu');
+    const catNav = document.getElementById('catNav');
+
+    async function loadMenu() {
+      try {
+        const response = await fetch('products.json');
+        if (!response.ok) throw new Error('Не удалось загрузить файл products.json (' + response.status + ')');
+        const data = await response.json();
+        MENU = data.categories || [];
+        renderMenu();
+        buildFlatList();   // ← ВАЖНО: строим список для поиска
+      } catch (err) {
+        console.error(err);
+        menuEl.innerHTML = `
+          <div class="error-box">
+            <b>Не удалось загрузить меню</b><br>
+            ${err.message}<br><br>
+            Возможно, страница открыта напрямую как файл.<br>
+            Запустите локальный сервер, например: <code>python -m http.server</code><br>
+            и откройте <code>http://localhost:8000</code>
+          </div>
+        `;
+      }
+    }
+
+    function renderMenu() {
+      menuEl.innerHTML = '';
+      catNav.innerHTML = '';
+
+      MENU.forEach((group, gi) => {
+        const btn = document.createElement('button');
+        btn.className = 'story';
+        btn.dataset.idx = gi;
+        if (gi === 0) btn.classList.add('active');
+
+        const thumbInner = `<span class="story-thumb-icon">${group.icon || '🍽️'}</span>`;
+
+        btn.innerHTML = `
+          <div class="story-ring">
+            <div class="story-ring-inner">${thumbInner}</div>
+          </div>
+          <span class="story-label">${group.name}</span>
+        `;
+
+        btn.addEventListener('click', () => {
+          const sec = document.getElementById('sec-' + gi);
+          if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        catNav.appendChild(btn);
+
+        const section = document.createElement('section');
+        section.className = 'category';
+        section.id = 'sec-' + gi;
+
+        const h2 = document.createElement('h2');
+        h2.textContent = group.name;
+        section.appendChild(h2);
+
+        const grid = document.createElement('div');
+        grid.className = 'item-grid';
+
+        group.items.forEach(item => {
+          const k = keyOf(group.name, item.name);
+          const row = document.createElement('div');
+          row.className = 'item';
+          row.dataset.itemKey = k;
+          row.id = 'item-' + slug(k);
+
+          const thumb = item.img
+            ? `<img class="item-thumb" src="${item.img}" alt="${item.name}">`
+            : `<div class="item-thumb item-thumb-icon">${group.icon || '🍽️'}</div>`;
+
+          row.innerHTML = `
+            <div class="item-thumb-wrap">
+              ${thumb}
+            </div>
+            <div class="item-info">
+              <p class="item-name">${item.name}</p>
+              ${item.desc ? `<p class="item-desc">${item.desc}</p>` : ``}
+              <div class="item-row">
+                <span class="price">${fmt(item.price)}</span>
+                <div class="qty-holder" data-key="${k}"></div>
+              </div>
+            </div>
+          `;
+          grid.appendChild(row);
+
+          const imgEl = row.querySelector('img.item-thumb');
+          if (imgEl) {
+            const replaceWithIcon = () => {
+              const icon = document.createElement('div');
+              icon.className = 'item-thumb item-thumb-icon';
+              icon.textContent = group.icon || '🍽️';
+              if (imgEl.parentNode) imgEl.replaceWith(icon);
+            };
+            imgEl.addEventListener('error', replaceWithIcon);
+            if (imgEl.complete && imgEl.naturalWidth === 0) replaceWithIcon();
+
+            imgEl.addEventListener('click', () => {
+              const src = item.imgFull || item.img;
+              if (!src) return;
+              openLightbox(src, item.name);
+            });
+          }
+
+          renderQtyControl(row.querySelector('.qty-holder'), group.name, item);
+        });
+
+        section.appendChild(grid);
+        menuEl.appendChild(section);
+      });
+
+      document.querySelectorAll('.item').forEach(card => revealObserver.observe(card));
+    }
+
+    /* =====================================================
+       ПОИСК С ПОДСКАЗКАМИ
+    ===================================================== */
+    const searchInput = document.getElementById('searchInput');
+    const searchClear = document.getElementById('searchClear');
+    const searchSuggestions = document.getElementById('searchSuggestions');
+
+    let allItems = [];
+    function buildFlatList() {
+      allItems = [];
+      MENU.forEach(group => {
+        group.items.forEach(item => {
+          allItems.push({
+            categoryName: group.name,
+            categoryIcon: group.icon || '🍽️',
+            name: item.name,
+            desc: item.desc || '',
+            price: item.price,
+            img: item.img,
+            key: keyOf(group.name, item.name),
+          });
+        });
+      });
+      console.log('✅ Список для поиска построен:', allItems.length, 'блюд');
+    }
+
+    function showSuggestions(rawQuery) {
+      const q = rawQuery.trim().toLowerCase();
+
+      if (!q) {
+        searchSuggestions.classList.remove('open');
+        searchSuggestions.innerHTML = '';
+        return;
+      }
+
+      const matches = allItems.filter(it => {
+        const hay = (it.name + ' ' + it.desc).toLowerCase();
+        return hay.includes(q);
+      }).slice(0, 8);
+
+      if (matches.length === 0) {
+        searchSuggestions.innerHTML = `
+          <div class="suggestion-empty">
+            <div class="suggestion-empty-icon">🔍</div>
+            Ничего не найдено
+          </div>
+        `;
+        searchSuggestions.classList.add('open');
+        return;
+      }
+
+      searchSuggestions.innerHTML = matches.map(it => {
+        const thumb = it.img
+          ? `<img class="suggestion-thumb" src="${it.img}" alt="${it.name}" onerror="this.style.display='none'">`
+          : `<div class="suggestion-thumb suggestion-thumb-icon">${it.categoryIcon}</div>`;
+        return `
+          <div class="suggestion-item" data-key="${it.key}">
+            ${thumb}
+            <div class="suggestion-info">
+              <span class="suggestion-name">${it.name}</span>
+              <span class="suggestion-category">${it.categoryName}</span>
+            </div>
+            <span class="suggestion-price">${fmt(it.price)}</span>
+          </div>
+        `;
+      }).join('');
+
+      searchSuggestions.classList.add('open');
+
+      searchSuggestions.querySelectorAll('.suggestion-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const key = el.dataset.key;
+          const itemEl = document.getElementById('item-' + slug(key));
+          searchSuggestions.classList.remove('open');
+          searchInput.blur();
+
+          if (itemEl) {
+            itemEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            itemEl.classList.add('highlight');
+            setTimeout(() => itemEl.classList.remove('highlight'), 1700);
+          }
+        });
+      });
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      const val = e.target.value;
+      searchClear.classList.toggle('visible', val.length > 0);
+      showSuggestions(val);
+    });
+
+    searchInput.addEventListener('focus', () => {
+      if (searchInput.value.trim()) showSuggestions(searchInput.value);
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        searchInput.value = '';
+        searchClear.classList.remove('visible');
+        searchSuggestions.classList.remove('open');
+        searchInput.blur();
+      }
+      if (e.key === 'Enter') {
+        const first = searchSuggestions.querySelector('.suggestion-item');
+        if (first) first.click();
+      }
+    });
+
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchClear.classList.remove('visible');
+      searchSuggestions.classList.remove('open');
+      searchInput.focus();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-wrapper')) {
+        searchSuggestions.classList.remove('open');
+      }
+    });
+
+    /* =====================================================
+       КНОПКИ +/- НА КАРТОЧКЕ
+    ===================================================== */
+    function renderQtyControl(holder, cat, item) {
+      const k = keyOf(cat, item.name);
+      const qty = cart[k] ? cart[k].qty : 0;
+
+      if (qty === 0) {
+        holder.innerHTML = `<button class="add-btn">+</button>`;
+        holder.querySelector('.add-btn').addEventListener('click', () => {
+          cart[k] = { name: item.name, price: item.price, qty: 1, category: cat };
+          renderQtyControl(holder, cat, item);
+          updateCartBar();
+          showToast(item.name, 1);
+          const card = holder.closest('.item');
+          if (card) {
+            card.classList.add('just-added');
+            setTimeout(() => card.classList.remove('just-added'), 400);
+          }
+        });
+      } else {
+        holder.innerHTML = `
+          <div class="qty">
+            <button class="minus">–</button>
+            <span class="count">${qty}</span>
+            <button class="plus">+</button>
+          </div>
+        `;
+        holder.querySelector('.minus').addEventListener('click', () => {
+          cart[k].qty -= 1;
+          if (cart[k].qty <= 0) delete cart[k];
+          renderQtyControl(holder, cat, item);
+          updateCartBar();
+        });
+        holder.querySelector('.plus').addEventListener('click', () => {
+          cart[k].qty += 1;
+          renderQtyControl(holder, cat, item);
+          updateCartBar();
+          showToast(item.name, cart[k].qty);
+        });
+      }
+    }
+
+    /* =====================================================
+       КОРЗИНА
+    ===================================================== */
+    const floatingCart = document.getElementById('floatingCart');
+    const floatingCartCount = document.getElementById('floatingCartCount');
+
+    function updateCartBar() {
+      const items = Object.values(cart);
+      const count = items.reduce((s, i) => s + i.qty, 0);
+      floatingCartCount.textContent = count;
+      floatingCart.style.display = count > 0 ? 'flex' : 'none';
+      renderDrawer();
+    }
+
+    const overlay = document.getElementById('overlay');
+    const drawer = document.getElementById('drawer');
+    const drawerBody = document.getElementById('drawerBody');
+    const drawerTotal = document.getElementById('drawerTotal');
+
+    document.getElementById('closeCart').addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+    function openDrawer() { overlay.classList.add('open'); drawer.classList.add('open'); }
+    function closeDrawer() { overlay.classList.remove('open'); drawer.classList.remove('open'); }
+
+    /* =====================================================
+       LIGHTBOX
+    ===================================================== */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+
+    function openLightbox(src, caption) {
+      lightboxImg.src = src;
+      lightboxCaption.textContent = caption || '';
+      lightbox.classList.add('open');
+    }
+    function closeLightbox() { lightbox.classList.remove('open'); }
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+    /* =====================================================
+       DRAWER RENDER
+    ===================================================== */
+    function renderDrawer() {
+      const items = Object.entries(cart);
+      if (items.length === 0) {
+        drawerBody.innerHTML = `<div class="empty-cart">Корзина пуста — выберите блюда в меню</div>`;
+        drawerTotal.textContent = fmt(0);
+        return;
+      }
+      drawerBody.innerHTML = items.map(([k, i]) => {
+        const [catFromKey] = k.split('|');
+        const categoryName = i.category || catFromKey;
+        return `
+          <div class="drawer-line" data-key="${k}">
+            <div class="item-info-block">
+              <div class="item-title">
+                <span class="name">${i.name}</span>
+                <span class="category-tag">${categoryName}</span>
+              </div>
+            </div>
+            <div class="drawer-qty">
+              <button class="d-minus" data-key="${k}">–</button>
+              <span class="count">${i.qty}</span>
+              <button class="d-plus" data-key="${k}">+</button>
+              <button class="remove" data-key="${k}" title="Удалить">&times;</button>
+            </div>
+            <span class="sum">${fmt(i.price * i.qty)}</span>
+          </div>
+        `;
+      }).join('');
+
+      drawerBody.querySelectorAll('.d-plus').forEach(btn => {
+        btn.addEventListener('click', () => { cart[btn.dataset.key].qty += 1; updateAll(); });
+      });
+      drawerBody.querySelectorAll('.d-minus').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const k = btn.dataset.key;
+          cart[k].qty -= 1;
+          if (cart[k].qty <= 0) delete cart[k];
+          updateAll();
+        });
+      });
+      drawerBody.querySelectorAll('.remove').forEach(btn => {
+        btn.addEventListener('click', () => { delete cart[btn.dataset.key]; updateAll(); });
+      });
+
+      const total = items.reduce((s, [, i]) => s + i.qty * i.price, 0);
+      drawerTotal.textContent = fmt(total);
+      updateDeliveryDisplay();
+    }
+
+    function updateAll() {
+      updateCartBar();
+      document.querySelectorAll('.qty-holder').forEach(holder => {
+        const k = holder.dataset.key;
+        const [cat, name] = k.split('|');
+        const group = MENU.find(g => g.name === cat);
+        if (!group) return;
+        const item = group.items.find(it => it.name === name);
+        if (!item) return;
+        renderQtyControl(holder, cat, item);
+      });
+    }
+
+    /* =====================================================
+       ДОСТАВКА
+    ===================================================== */
+    function currentCartTotal() {
+      return Object.values(cart).reduce((s, i) => s + i.qty * i.price, 0);
+    }
+
+    function calcDelivery() {
+      const zoneName = deliveryZoneSelect.value;
+      if (!zoneName) return null;
+      if (zoneName === DELIVERY_CUSTOM_VALUE) return { custom: true };
+      const zone = DELIVERY_ZONES.find(z => z.name === zoneName);
+      if (!zone) return null;
+      const sum = currentCartTotal();
+      const free = sum >= zone.freeFrom;
+      return { zoneName: zone.name, price: free ? 0 : zone.price, free, freeFrom: zone.freeFrom };
+    }
+
+    const deliveryLine = document.getElementById('deliveryLine');
+    const deliveryLabel = document.getElementById('deliveryLabel');
+    const deliveryCostEl = document.getElementById('deliveryCost');
+    const deliveryNote = document.getElementById('deliveryNote');
+    const grandTotalRow = document.getElementById('grandTotalRow');
+    const grandTotalEl = document.getElementById('grandTotal');
+
+    function updateDeliveryDisplay() {
+      if (orderType !== 'delivery') {
+        deliveryLine.style.display = 'none';
+        deliveryNote.style.display = 'none';
+        grandTotalRow.style.display = 'none';
+        return;
+      }
+
+      const info = calcDelivery();
+      const sum = currentCartTotal();
+
+      if (!info) {
+        deliveryLine.style.display = 'none';
+        deliveryNote.style.display = 'block';
+        deliveryNote.textContent = 'Выберите населённый пункт, чтобы узнать стоимость доставки';
+        grandTotalRow.style.display = 'none';
+        return;
+      }
+
+      if (info.custom) {
+        deliveryLine.style.display = 'none';
+        deliveryNote.style.display = 'block';
+        deliveryNote.textContent = 'Стоимость доставки по вашему адресу уточнит оператор в WhatsApp';
+        grandTotalRow.style.display = 'none';
+        return;
+      }
+
+      deliveryLine.style.display = 'flex';
+      deliveryLabel.textContent = `Доставка (${info.zoneName})`;
+      deliveryCostEl.textContent = info.free ? 'Бесплатно' : fmt(info.price);
+
+      if (info.free) {
+        deliveryNote.style.display = 'none';
+      } else {
+        deliveryNote.style.display = 'block';
+        deliveryNote.textContent = `Бесплатная доставка от ${fmt(info.freeFrom)}`;
+      }
+
+      grandTotalRow.style.display = 'flex';
+      grandTotalEl.textContent = fmt(sum + info.price);
+    }
+
+    const deliveryZoneSelect = document.getElementById('deliveryZone');
+    deliveryZoneSelect.innerHTML =
+      '<option value="">Выберите населённый пункт</option>' +
+      DELIVERY_ZONES.map(z => `<option value="${z.name}">${z.name}</option>`).join('') +
+      `<option value="${DELIVERY_CUSTOM_VALUE}">Свой вариант (укажу адрес в WhatsApp)</option>`;
+    deliveryZoneSelect.addEventListener('change', updateDeliveryDisplay);
+
+    /* =====================================================
+       ТИП ЗАКАЗА
+    ===================================================== */
+    let orderType = 'delivery';
+    const typeDelivery = document.getElementById('typeDelivery');
+    const typePickup = document.getElementById('typePickup');
+    const addressField = document.getElementById('addressField');
+    const zoneField = document.getElementById('zoneField');
+
+    typeDelivery.addEventListener('click', () => {
+      orderType = 'delivery';
+      typeDelivery.classList.add('active');
+      typePickup.classList.remove('active');
+      addressField.style.display = 'block';
+      zoneField.style.display = 'block';
+      updateDeliveryDisplay();
+    });
+    typePickup.addEventListener('click', () => {
+      orderType = 'pickup';
+      typePickup.classList.add('active');
+      typeDelivery.classList.remove('active');
+      addressField.style.display = 'none';
+      zoneField.style.display = 'none';
+      updateDeliveryDisplay();
+    });
+
+    /* =====================================================
+       ОТПРАВКА В WHATSAPP
+    ===================================================== */
+    document.getElementById('sendWa').addEventListener('click', () => {
+      const items = Object.entries(cart);
+      if (items.length === 0) { alert('Добавьте хотя бы одну позицию в заказ'); return; }
+
+      const name = document.getElementById('clientName').value.trim();
+      const phone = document.getElementById('clientPhone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const comment = document.getElementById('comment').value.trim();
+      const zoneName = deliveryZoneSelect.value;
+
+      if (!name || !phone) { alert('Укажите имя и телефон для заказа'); return; }
+      if (orderType === 'delivery' && !zoneName) { alert('Выберите населённый пункт доставки'); return; }
+      if (orderType === 'delivery' && !address) { alert('Укажите адрес доставки'); return; }
+
+      const total = items.reduce((s, [, i]) => s + i.qty * i.price, 0);
+      const deliveryInfo = orderType === 'delivery' ? calcDelivery() : null;
+
+      let text = "Здравствуйте! Хочу сделать заказ:\n\n";
+      items.forEach(([k, i]) => {
+        const [catFromKey] = k.split('|');
+        const categoryName = i.category || catFromKey;
+        text += `• [${categoryName}] ${i.name} × ${i.qty} — ${fmt(i.price * i.qty)}\n`;
+      });
+      text += `\nСумма заказа: ${fmt(total)}\n`;
+      text += `Тип заказа: ${orderType === 'delivery' ? 'Доставка' : 'Самовывоз / зал'}\n`;
+
+      if (orderType === 'delivery') {
+        if (deliveryInfo && deliveryInfo.custom) {
+          text += `Населённый пункт: свой вариант (уточню адрес)\n`;
+          text += `Адрес: ${address}\n`;
+          text += `Стоимость доставки: уточняется у оператора\n`;
+        } else if (deliveryInfo) {
+          text += `Населённый пункт: ${deliveryInfo.zoneName}\n`;
+          text += `Адрес: ${address}\n`;
+          text += `Доставка: ${deliveryInfo.free ? 'бесплатно' : fmt(deliveryInfo.price)}\n`;
+          text += `Итого к оплате: ${fmt(total + deliveryInfo.price)}\n`;
+        }
+      }
+
+      text += `Имя: ${name}\n`;
+      text += `Телефон: ${phone}\n`;
+      if (comment) text += `Комментарий: ${comment}\n`;
+
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    });
+
+    /* =====================================================
+       ПОДСВЕТКА КАТЕГОРИИ ПРИ СКРОЛЛЕ
+    ===================================================== */
+    window.addEventListener('scroll', () => {
+      const sections = MENU.map((_, i) => document.getElementById('sec-' + i));
+      const navButtons = Array.from(catNav.children);
+      let current = 0;
+      sections.forEach((sec, i) => {
+        if (sec && sec.getBoundingClientRect().top - 160 <= 0) current = i;
+      });
+      navButtons.forEach((b, i) => b.classList.toggle('active', i === current));
+    }, { passive: true });
+
+    floatingCart.addEventListener('click', openDrawer);
+
+    /* =====================================================
+       ПЛАВНОЕ ПОЯВЛЕНИЕ КАРТОЧЕК
+    ===================================================== */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    /* =====================================================
+       СТАРТ
+    ===================================================== */
+    loadMenu();
+  </script>
+
+</body>
+</html>

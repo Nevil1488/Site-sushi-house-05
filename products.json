@@ -1,0 +1,98 @@
+{
+  "categories": [
+    {
+      "id": "cold_rolls",
+      "name": "Холодные роллы",
+      "icon": "🍣",
+      "items": []
+    },
+    {
+      "id": "hot_rolls",
+      "name": "Горячие роллы",
+      "icon": "🔥",
+      "items": [
+        {
+          "name": "Цезарь с курицей",
+          "desc": "мясо соусы",
+          "price": 229,
+          "img": "images/thumb/цезарь_с_курицей.jpg"
+        }
+      ]
+    },
+    {
+      "id": "baked_rolls",
+      "name": "Запечённые роллы",
+      "icon": "🍱",
+      "items": []
+    },
+    {
+      "id": "fastfood",
+      "name": "Фастфуд",
+      "icon": "🌯",
+      "items": []
+    },
+    {
+      "id": "burgers",
+      "name": "Бургеры",
+      "icon": "🍔",
+      "items": []
+    },
+    {
+      "id": "pizza",
+      "name": "Пицца",
+      "icon": "🍕",
+      "items": [
+        {
+          "name": "Цезарь",
+          "desc": "Зелень помидоры сыр",
+          "price": 399,
+          "img": "images/thumb/цезарь.jpg"
+        },
+        {
+          "name": "4 сыра",
+          "desc": "Много сыра",
+          "price": 359,
+          "img": "images/thumb/4_сыра.jpg"
+        },
+        {
+          "name": "Пепперони",
+          "desc": "колбаса сыр соусы",
+          "price": 399,
+          "img": "images/thumb/пепперони.jpg"
+        }
+      ]
+    },
+    {
+      "id": "drinks",
+      "name": "Напитки",
+      "icon": "🥤",
+      "items": [
+        {
+          "name": "Лимонад",
+          "desc": "лимон мята лед",
+          "price": 159,
+          "img": "images/thumb/лимонад.jpg"
+        }
+      ]
+    },
+    {
+      "id": "sauces",
+      "name": "Соусы",
+      "icon": "🧉",
+      "items": []
+    },
+    {
+      "id": "хот_доги",
+      "name": "Хот-доги",
+      "icon": "🌭",
+      "items": [
+        {
+          "name": "Стандартный",
+          "desc": "Сосиска соусы",
+          "price": 199,
+          "img": "images/thumb/стандартный.jpg"
+        }
+      ]
+    }
+  ]
+}
