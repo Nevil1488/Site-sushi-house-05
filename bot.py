@@ -41,16 +41,6 @@ IMAGES_THUMB.mkdir(parents=True, exist_ok=True)
 
 # ===================== ФАЙЛ =====================
 
-import subprocess
-
-def git_push():
-    try:
-        subprocess.run(["git", "add", "products.json"], cwd=BASE_DIR, check=True)
-        subprocess.run(["git", "commit", "-m", "Auto-update menu"], cwd=BASE_DIR, check=True)
-        subprocess.run(["git", "push"], cwd=BASE_DIR, check=True)
-    except Exception as e:
-        print("⚠️ Git push failed:", e)
-
 def load_data() -> dict:
     if not PRODUCTS_FILE.exists():
         return {"categories": []}
@@ -63,7 +53,6 @@ def load_data() -> dict:
 def save_data(data: dict) -> None:
     with open(PRODUCTS_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    git_push()
 
 def slugify(text: str) -> str:
     text = text.lower().strip()
