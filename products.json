@@ -10,19 +10,6 @@
       "id": "hot_rolls",
       "name": "Горячие роллы",
       "icon": "🔥",
-      "items": [
-        {
-          "name": "Цезарь с курицей",
-          "desc": "мясо соусы",
-          "price": 229,
-          "img": "images/thumb/цезарь_с_курицей.jpg"
-        }
-      ]
-    },
-    {
-      "id": "baked_rolls",
-      "name": "Запечённые роллы",
-      "icon": "🍱",
       "items": []
     },
     {
@@ -43,22 +30,34 @@
       "icon": "🍕",
       "items": [
         {
+          "name": "Мясная",
+          "desc": "",
+          "price": 380,
+          "img": "images/thumb/мясная.jpg"
+        },
+        {
           "name": "Цезарь",
-          "desc": "Зелень помидоры сыр",
-          "price": 399,
+          "desc": "",
+          "price": 380,
           "img": "images/thumb/цезарь.jpg"
         },
         {
-          "name": "4 сыра",
-          "desc": "Много сыра",
-          "price": 359,
-          "img": "images/thumb/4_сыра.jpg"
+          "name": "Ойси",
+          "desc": "",
+          "price": 380,
+          "img": "images/thumb/ойси.jpg"
         },
         {
-          "name": "Пепперони",
-          "desc": "колбаса сыр соусы",
-          "price": 399,
-          "img": "images/thumb/пепперони.jpg"
+          "name": "Фри",
+          "desc": "",
+          "price": 380,
+          "img": "images/thumb/фри.jpg"
+        },
+        {
+          "name": "4 сыра",
+          "desc": "",
+          "price": 380,
+          "img": "images/thumb/4_сыра.jpg"
         }
       ]
     },
@@ -66,14 +65,7 @@
       "id": "drinks",
       "name": "Напитки",
       "icon": "🥤",
-      "items": [
-        {
-          "name": "Лимонад",
-          "desc": "лимон мята лед",
-          "price": 159,
-          "img": "images/thumb/лимонад.jpg"
-        }
-      ]
+      "items": []
     },
     {
       "id": "sauces",
@@ -88,11 +80,17 @@
       "items": [
         {
           "name": "Стандартный",
-          "desc": "Сосиска соусы",
-          "price": 199,
+          "desc": "",
+          "price": 150,
           "img": "images/thumb/стандартный.jpg"
         }
       ]
+    },
+    {
+      "id": "чуду",
+      "name": "Чуду",
+      "icon": "🍽",
+      "items": []
     }
   ]
 }

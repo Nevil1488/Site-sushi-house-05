@@ -15,7 +15,7 @@ import asyncio
 import json
 import re
 from pathlib import Path
-
+import shutil
 from aiogram import Bot, Dispatcher, F, Router
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
@@ -31,7 +31,7 @@ from aiogram.types import (
 
 # ===================== НАСТРОЙКИ =====================
 BOT_TOKEN = "8885443774:AAEW2bLG3JQY-bcXZGjXkyqws-hSRUHElDg"
-ADMIN_IDS = [5312985947]  # ← ваш Telegram ID
+ADMIN_IDS = [5312985947,5527685164]  # ← ваш Telegram ID
 
 BASE_DIR = Path(__file__).parent
 PRODUCTS_FILE = BASE_DIR / "products.json"
@@ -53,6 +53,11 @@ def load_data() -> dict:
 def save_data(data: dict) -> None:
     with open(PRODUCTS_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+    # Копируем в папку сайта
+    try:
+        shutil.copy(PRODUCTS_FILE, "/var/www/sushi/products.json")
+    except Exception as e:
+        print("⚠️ Не удалось скопировать в /var/www/sushi:", e)
 
 def slugify(text: str) -> str:
     text = text.lower().strip()
