@@ -141,6 +141,12 @@
           "desc": "",
           "price": 50,
           "img": "images/thumb/соус_томатный.jpg"
+        },
+        {
+          "name": "2234",
+          "desc": "432",
+          "price": 3434,
+          "img": "images/thumb/2234.jpg"
         }
       ]
     },
