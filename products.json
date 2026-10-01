@@ -26,7 +26,7 @@
         {
           "name": "Филадельфия классик",
           "desc": "",
-          "price": 320,
+          "price": 340,
           "img": "images/thumb/филадельфия_классик.jpg"
         }
       ]
@@ -78,6 +78,12 @@
           "desc": "",
           "price": 250,
           "img": "images/thumb/бургер_классик.jpg"
+        },
+        {
+          "name": "Острые крылышки 4шт",
+          "desc": "",
+          "price": 250,
+          "img": "images/thumb/крылышки_4шт.jpg"
         }
       ]
     },
@@ -131,13 +137,13 @@
         {
           "name": "Колбасная",
           "desc": "",
-          "price": 360,
+          "price": 380,
           "img": "images/thumb/колбасная.jpg"
         },
         {
           "name": "Грибная",
           "desc": "",
-          "price": 360,
+          "price": 380,
           "img": "images/thumb/грибная.jpg"
         }
       ]
