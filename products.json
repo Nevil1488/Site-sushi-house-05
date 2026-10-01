@@ -37,16 +37,16 @@
       "icon": "🌯",
       "items": [
         {
-          "name": "Фри",
-          "desc": "",
-          "price": 150,
-          "img": "images/thumb/фри.jpg"
-        },
-        {
           "name": "Фри по деревенски",
           "desc": "",
           "price": 150,
           "img": "images/thumb/фри_по_деревенски.jpg"
+        },
+        {
+          "name": "Фри классик",
+          "desc": "",
+          "price": 150,
+          "img": "images/thumb/фри_классик.jpg"
         }
       ]
     },
@@ -80,16 +80,16 @@
           "img": "images/thumb/ойси.jpg"
         },
         {
-          "name": "Фри",
-          "desc": "",
-          "price": 380,
-          "img": "images/thumb/фри.jpg"
-        },
-        {
           "name": "4 сыра",
           "desc": "",
           "price": 380,
           "img": "images/thumb/4_сыра.jpg"
+        },
+        {
+          "name": "Фри",
+          "desc": "",
+          "price": 380,
+          "img": "images/thumb/фри.jpg"
         }
       ]
     },
