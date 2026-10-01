@@ -144,6 +144,12 @@
           "desc": "",
           "price": 500,
           "img": "images/thumb/крылышки_8шт.jpg"
+        },
+        {
+          "name": "Острые крылышки 12шт",
+          "desc": "",
+          "price": 750,
+          "img": "images/thumb/острые_крылышки_12шт.jpg"
         }
       ]
     },
@@ -236,6 +242,12 @@
           "desc": "",
           "price": 120,
           "img": "images/thumb/менди_ягодный.jpg"
+        },
+        {
+          "name": "Кола добрый 0.33л",
+          "desc": "",
+          "price": 100,
+          "img": "images/thumb/кола_добрый_0_33л.jpg"
         }
       ]
     },
