@@ -22,6 +22,12 @@
           "desc": "",
           "price": 340,
           "img": "images/thumb/бешеная_креветка.jpg"
+        },
+        {
+          "name": "Филадельфия классик",
+          "desc": "",
+          "price": 320,
+          "img": "images/thumb/филадельфия_классик.jpg"
         }
       ]
     },
@@ -109,6 +115,24 @@
           "desc": "",
           "price": 380,
           "img": "images/thumb/сицилийская.jpg"
+        },
+        {
+          "name": "Пепперони",
+          "desc": "",
+          "price": 380,
+          "img": "images/thumb/пепперони.jpg"
+        },
+        {
+          "name": "Колбасная",
+          "desc": "",
+          "price": 360,
+          "img": "images/thumb/колбасная.jpg"
+        },
+        {
+          "name": "Грибная",
+          "desc": "",
+          "price": 360,
+          "img": "images/thumb/грибная.jpg"
         }
       ]
     },
