@@ -35,7 +35,20 @@
       "id": "fastfood",
       "name": "Фастфуд",
       "icon": "🌯",
-      "items": []
+      "items": [
+        {
+          "name": "Фри",
+          "desc": "",
+          "price": 150,
+          "img": "images/thumb/фри.jpg"
+        },
+        {
+          "name": "Фри по деревенски",
+          "desc": "",
+          "price": 150,
+          "img": "images/thumb/фри_по_деревенски.jpg"
+        }
+      ]
     },
     {
       "id": "burgers",
