@@ -169,6 +169,12 @@
           "desc": "",
           "price": 380,
           "img": "images/thumb/грибная.jpg"
+        },
+        {
+          "name": "Жульен",
+          "desc": "",
+          "price": 380,
+          "img": "images/thumb/жульен.jpg"
         }
       ]
     },
@@ -239,6 +245,12 @@
           "desc": "",
           "price": 200,
           "img": "images/thumb/чуду_с_мясом.jpg"
+        },
+        {
+          "name": "Чуду с творогом",
+          "desc": "",
+          "price": 200,
+          "img": "images/thumb/чуду_с_творогом.jpg"
         }
       ]
     }
