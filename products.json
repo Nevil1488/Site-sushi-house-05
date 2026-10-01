@@ -116,7 +116,14 @@
       "id": "drinks",
       "name": "Напитки",
       "icon": "🥤",
-      "items": []
+      "items": [
+        {
+          "name": "Кола Добрый 1л",
+          "desc": "",
+          "price": 120,
+          "img": "images/thumb/кола_добрый_1л.jpg"
+        }
+      ]
     },
     {
       "id": "sauces",
