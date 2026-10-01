@@ -90,6 +90,12 @@
           "desc": "",
           "price": 380,
           "img": "images/thumb/фри.jpg"
+        },
+        {
+          "name": "Сицилийская",
+          "desc": "",
+          "price": 380,
+          "img": "images/thumb/сицилийская.jpg"
         }
       ]
     },
