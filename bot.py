@@ -54,10 +54,7 @@ def save_data(data: dict) -> None:
     with open(PRODUCTS_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     # Копируем в папку сайта
-    try:
-        shutil.copy(PRODUCTS_FILE, "/var/www/sushi/products.json")
-    except Exception as e:
-        print("⚠️ Не удалось скопировать в /var/www/sushi:", e)
+    
 
 def slugify(text: str) -> str:
     text = text.lower().strip()

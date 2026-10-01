@@ -4,7 +4,26 @@
       "id": "cold_rolls",
       "name": "Холодные роллы",
       "icon": "🍣",
-      "items": []
+      "items": [
+        {
+          "name": "Калифорния с лососем",
+          "desc": "",
+          "price": 320,
+          "img": "images/thumb/калифорния_с_лососем.jpg"
+        },
+        {
+          "name": "Ролл-ойси",
+          "desc": "",
+          "price": 340,
+          "img": "images/thumb/ролл_ойси.jpg"
+        },
+        {
+          "name": "Бешеная креветка",
+          "desc": "",
+          "price": 340,
+          "img": "images/thumb/бешеная_креветка.jpg"
+        }
+      ]
     },
     {
       "id": "hot_rolls",
