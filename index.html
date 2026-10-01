@@ -663,7 +663,7 @@
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.45);
-      z-index: 20;
+      z-index: 70;
       display: none;
     }
 
@@ -674,7 +674,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 80;
+      z-index: 150;
       background: #fff;
       border-radius: 16px 16px 0 0;
       max-height: 92vh;
@@ -682,6 +682,7 @@
       flex-direction: column;
       transform: translateY(100%);
       transition: transform .25s ease;
+      overflow: hidden;
     }
 
     .drawer.open { transform: translateY(0); }
@@ -694,6 +695,8 @@
       border-bottom: 2px solid #d32f2f;
       background: #fff;
       flex-shrink: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .drawer-head h3 {
@@ -1129,7 +1132,7 @@
       .toast-container { bottom: 100px; right: 12px; left: 12px; align-items: flex-end; }
       .toast { min-width: 0; max-width: 100%; }
 
-      .floating-cart { right: 14px; bottom: 54px; padding: 12px 18px; font-size: 13px; }
+      .floating-cart { right: 14px; bottom: 30px; padding: 12px 18px; font-size: 13px; }
 
       .search-suggestions { max-height: 60vh; }
     }
@@ -1145,6 +1148,12 @@
       /* Адрес и часы ещё компактнее */
       .address, .work-hours { font-size: 13px; }
       .second-color { font-size: 14px; }
+    }
+        /* При открытой корзине на узких экранах прячем поиск */
+    @media (max-width: 1023px) {
+      body.cart-open .search-wrapper {
+        display: none;
+      }
     }
 </style>
 </head>
@@ -1673,8 +1682,16 @@
     document.getElementById('closeCart').addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
 
-    function openDrawer() { overlay.classList.add('open'); drawer.classList.add('open'); }
-    function closeDrawer() { overlay.classList.remove('open'); drawer.classList.remove('open'); }
+        function openDrawer() {
+      overlay.classList.add('open');
+      drawer.classList.add('open');
+      document.body.classList.add('cart-open');
+    }
+    function closeDrawer() {
+      overlay.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.classList.remove('cart-open');
+    }
 
     /* =====================================================
        LIGHTBOX
