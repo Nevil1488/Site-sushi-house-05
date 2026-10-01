@@ -124,10 +124,16 @@
           "img": "images/thumb/кола_добрый_1л.jpg"
         },
         {
-          "name": "222",
-          "desc": "22",
-          "price": 222,
-          "img": "images/thumb/222.jpg"
+          "name": "Менди персиковый",
+          "desc": "",
+          "price": 120,
+          "img": "images/thumb/менди.jpg"
+        },
+        {
+          "name": "Менди ягодный",
+          "desc": "",
+          "price": 120,
+          "img": "images/thumb/менди_ягодный.jpg"
         }
       ]
     },
@@ -141,12 +147,6 @@
           "desc": "",
           "price": 50,
           "img": "images/thumb/соус_томатный.jpg"
-        },
-        {
-          "name": "2234",
-          "desc": "432",
-          "price": 3434,
-          "img": "images/thumb/2234.jpg"
         }
       ]
     },
