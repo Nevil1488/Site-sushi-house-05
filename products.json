@@ -29,7 +29,14 @@
       "id": "hot_rolls",
       "name": "Горячие роллы",
       "icon": "🔥",
-      "items": []
+      "items": [
+        {
+          "name": "Цезарь с курицей",
+          "desc": "",
+          "price": 280,
+          "img": "images/thumb/цезарь_с_курицей.jpg"
+        }
+      ]
     },
     {
       "id": "fastfood",
@@ -134,7 +141,14 @@
       "id": "чуду",
       "name": "Чуду",
       "icon": "🍽",
-      "items": []
+      "items": [
+        {
+          "name": "Чуду с мясом",
+          "desc": "",
+          "price": 380,
+          "img": "images/thumb/чуду_с_мясом.jpg"
+        }
+      ]
     }
   ]
 }
