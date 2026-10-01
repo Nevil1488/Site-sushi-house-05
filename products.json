@@ -84,6 +84,18 @@
           "desc": "",
           "price": 250,
           "img": "images/thumb/крылышки_4шт.jpg"
+        },
+        {
+          "name": "Шаурма классик",
+          "desc": "",
+          "price": 180,
+          "img": "images/thumb/шаурма_классик.jpg"
+        },
+        {
+          "name": "Шаурма сырная",
+          "desc": "",
+          "price": 180,
+          "img": "images/thumb/шаурма_сырная.jpg"
         }
       ]
     },
