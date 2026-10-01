@@ -122,7 +122,14 @@
       "id": "sauces",
       "name": "Соусы",
       "icon": "🧉",
-      "items": []
+      "items": [
+        {
+          "name": "Соус томатный",
+          "desc": "",
+          "price": 50,
+          "img": "images/thumb/соус_томатный.jpg"
+        }
+      ]
     },
     {
       "id": "хот_доги",
