@@ -162,6 +162,18 @@
           "desc": "",
           "price": 450,
           "img": "images/thumb/наггетсы_12шт.jpg"
+        },
+        {
+          "name": "Стрипсы острые 6шт",
+          "desc": "",
+          "price": 300,
+          "img": "images/thumb/стрипсы_6шт.jpg"
+        },
+        {
+          "name": "Стрипсы острые 8шт",
+          "desc": "",
+          "price": 400,
+          "img": "images/thumb/стрипсы_острые_8шт.jpg"
         }
       ]
     },
