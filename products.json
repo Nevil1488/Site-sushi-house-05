@@ -102,6 +102,12 @@
           "desc": "",
           "price": 180,
           "img": "images/thumb/шаурма_в_кляре.jpg"
+        },
+        {
+          "name": "Шаурма острая",
+          "desc": "",
+          "price": 180,
+          "img": "images/thumb/шаурма_острая.jpg"
         }
       ]
     },
