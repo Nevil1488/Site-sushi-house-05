@@ -275,6 +275,12 @@
           "desc": "",
           "price": 180,
           "img": "images/thumb/чуду_с_творогом.jpg"
+        },
+        {
+          "name": "Чуду с тыквой",
+          "desc": "",
+          "price": 180,
+          "img": "images/thumb/чуду_с_тыквой.jpg"
         }
       ]
     }
