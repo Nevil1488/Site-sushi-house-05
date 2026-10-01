@@ -122,6 +122,12 @@
           "desc": "",
           "price": 120,
           "img": "images/thumb/кола_добрый_1л.jpg"
+        },
+        {
+          "name": "222",
+          "desc": "22",
+          "price": 222,
+          "img": "images/thumb/222.jpg"
         }
       ]
     },
