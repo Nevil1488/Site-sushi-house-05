@@ -47,14 +47,20 @@
           "desc": "",
           "price": 150,
           "img": "images/thumb/фри_классик.jpg"
+        },
+        {
+          "name": "Бургер куриный",
+          "desc": "",
+          "price": 200,
+          "img": "images/thumb/бургер_куриный.jpg"
+        },
+        {
+          "name": "Бургер классик",
+          "desc": "",
+          "price": 250,
+          "img": "images/thumb/бургер_классик.jpg"
         }
       ]
-    },
-    {
-      "id": "burgers",
-      "name": "Бургеры",
-      "icon": "🍔",
-      "items": []
     },
     {
       "id": "pizza",
