@@ -156,6 +156,12 @@
           "desc": "",
           "price": 250,
           "img": "images/thumb/наггетсы_6шт.jpg"
+        },
+        {
+          "name": "Наггетсы 12шт",
+          "desc": "",
+          "price": 450,
+          "img": "images/thumb/наггетсы_12шт.jpg"
         }
       ]
     },
