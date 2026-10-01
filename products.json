@@ -150,6 +150,12 @@
           "desc": "",
           "price": 750,
           "img": "images/thumb/острые_крылышки_12шт.jpg"
+        },
+        {
+          "name": "Наггетсы 6шт",
+          "desc": "",
+          "price": 250,
+          "img": "images/thumb/наггетсы_6шт.jpg"
         }
       ]
     },
