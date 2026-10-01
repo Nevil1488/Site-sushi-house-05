@@ -138,6 +138,12 @@
           "desc": "",
           "price": 180,
           "img": "images/thumb/шаурма_острая.jpg"
+        },
+        {
+          "name": "Крылышки 8шт",
+          "desc": "",
+          "price": 500,
+          "img": "images/thumb/крылышки_8шт.jpg"
         }
       ]
     },
