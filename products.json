@@ -40,6 +40,12 @@
           "desc": "",
           "price": 320,
           "img": "images/thumb/калифорния_с_креветкой.jpg"
+        },
+        {
+          "name": "Бешеный лосось",
+          "desc": "",
+          "price": 340,
+          "img": "images/thumb/бешеный_лосось.jpg"
         }
       ]
     },
