@@ -143,10 +143,16 @@
       "icon": "🧉",
       "items": [
         {
-          "name": "Соус томатный",
+          "name": "Томатный соус",
           "desc": "",
           "price": 50,
           "img": "images/thumb/соус_томатный.jpg"
+        },
+        {
+          "name": "Сырный соус",
+          "desc": "",
+          "price": 50,
+          "img": "images/thumb/сырный_соус.jpg"
         }
       ]
     },
