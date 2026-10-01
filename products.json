@@ -96,6 +96,12 @@
           "desc": "",
           "price": 180,
           "img": "images/thumb/шаурма_сырная.jpg"
+        },
+        {
+          "name": "Шаурма в кляре",
+          "desc": "",
+          "price": 180,
+          "img": "images/thumb/шаурма_в_кляре.jpg"
         }
       ]
     },
